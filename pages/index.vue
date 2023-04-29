@@ -1,19 +1,20 @@
 <template>
   <div>
+    <Navigation :data="data" />
     <pre>
-      {{ mains }}
+      {{ data.mains }}
     </pre>
     <hr />
     <pre>
-      {{ subs }}
+      {{ data.subs }}
     </pre>
     <hr />
     <pre>
-    {{ pages }}
+      {{ data.pages }}
     </pre>
     <hr />
     <pre>
-    {{ profiles }}
+      {{ data.profiles }}
     </pre>
   </div>
 </template>
@@ -25,10 +26,12 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      mains: [],
-      subs: [],
-      pages: [],
-      profiles: [],
+      data: {
+        mains: [],
+        subs: [],
+        pages: [],
+        profiles: [],
+      },
     };
   },
   methods: {
@@ -45,10 +48,10 @@ export default {
       const getProfiles = await axios.get(
         "https://strapi-g0fi.onrender.com/api/profiles?populate=*"
       );
-      this.mains = getMains.data;
-      this.subs = getSubs.data;
-      this.pages = getPages.data;
-      this.profiles = getProfiles.data;
+      this.data.mains = getMains.data;
+      this.data.subs = getSubs.data;
+      this.data.pages = getPages.data;
+      this.data.profiles = getProfiles.data;
     },
     navigate(page) {
       this.active = page;
