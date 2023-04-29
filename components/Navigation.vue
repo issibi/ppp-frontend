@@ -2,22 +2,41 @@
   <nav>
     <ul>
       <li v-for="(category, index) in data.mains" :key="index">
-        <NuxtLink :to="'/p/' + category.attributes.Slug">
+        <NuxtLink
+          :class="currentRouteName(category.attributes.Slug)"
+          :to="
+            '/' +
+            category.attributes.Slug +
+            '/' +
+            (category.attributes.page.data !== null
+              ? category.attributes.page.data.attributes.Slug
+              : category.attributes.profile.data.attributes.Slug)
+          "
+        >
           {{ category.attributes.Title }}
         </NuxtLink>
         <ul>
           <li v-for="(page, index) in pages(category.id)" :key="index">
-            <NuxtLink :to="'/p/' + page.attributes.Slug">
+            <NuxtLink
+              :to="'/' + category.attributes.Slug + '/' + page.attributes.Slug"
+            >
               {{ page.attributes.Title }}
             </NuxtLink>
           </li>
           <li v-for="(sub, index) in subs(category.id)" :key="index">
-            <NuxtLink :to="'/p/' + sub.attributes.Slug">
+            <a href="javascript:void(0)">
               {{ sub.attributes.Title }}
-            </NuxtLink>
+            </a>
             <ul>
               <li v-for="(profiles, index) in profiles(sub.id)" :key="index">
-                <NuxtLink :to="'/p/' + profiles.attributes.Slug">
+                <NuxtLink
+                  :to="
+                    '/' +
+                    category.attributes.Slug +
+                    '/' +
+                    profiles.attributes.Slug
+                  "
+                >
                   {{ profiles.attributes.Profile_title }}
                 </NuxtLink>
               </li>
@@ -64,12 +83,17 @@ export default {
     pages(id) {
       let filtered_pages = this.data.pages;
       return filtered_pages.filter((e) => {
-        return e.attributes.main_category.data.id === id;
+        if (e.attributes.main_category.data !== null) {
+          return e.attributes.main_category.data.id === id;
+        } else {
+          return false;
+        }
       });
     },
     subs(id) {
       let filtered_subs = this.data.subs;
       return filtered_subs.filter((e) => {
+        console.log(e.attributes.main_category.data.id);
         return e.attributes.main_category.data.id === id;
       });
     },
@@ -79,9 +103,13 @@ export default {
         return e.attributes.sub_category.data.id === id;
       });
     },
+    currentRouteName(slug) {
+      return Object.keys(this.$route.params)[0] == slug ? "active" : "";
+    },
   },
   async mounted() {
     await this.fetchContents();
   },
+  computed: {},
 };
 </script>
