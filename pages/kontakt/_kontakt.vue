@@ -14,6 +14,7 @@
       ></div>
     </main>
     <img
+      v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
       class="background"
       :src="
         'https://strapi-g0fi.onrender.com' +
