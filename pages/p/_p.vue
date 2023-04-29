@@ -1,5 +1,13 @@
 <template>
-  <div>Some content {{ currentRouteName }}</div>
+  <article>
+    <main>
+      {{ currentRouteName }}
+    </main>
+    <aside>
+
+    </aside>
+  </article>
+  
 </template>
 
 <script>

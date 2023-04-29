@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="page">
+    <Header />
     <Navigation />
     <div>
       <Nuxt />

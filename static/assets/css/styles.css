@@ -1,0 +1,320 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 20px;
+}
+body {
+  font-family: "Inter", sans-serif;
+  position: relative;
+  background: #f1f1f1;
+  color: #23304d;
+  font-size: 0.85rem;
+  line-height: 1.1em;
+}
+.toggle {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: block;
+  background-color: transparent;
+  color: currentColor;
+  padding: 0;
+  border: 0 none;
+  display: none;
+  z-index: 30;
+}
+.toggle:focus {
+  outline: none;
+}
+.page {
+  position: relative;
+  padding: 10px 20px 0;
+  border: 1px solid #cbcbcb;
+  width: 100%;
+  transform-origin: left top;
+}
+.logo {
+  width: 122px;
+  height: 64px;
+  display: block;
+  background-image: url(../svg/PPP-Logo.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+h1,
+h2 {
+  font-size: 21.3px;
+  line-height: 1em;
+  font-weight: 400;
+}
+h1 + div {
+  margin-top: 20px;
+}
+p + p {
+  margin-top: 20px;
+}
+p {
+  line-height: 1.25em;
+}
+header {
+  width: 100%;
+}
+header a {
+  display: block;
+}
+nav {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  transform: translate(-100%, 0);
+  background: #fff;
+  bottom: 0;
+  left: 0;
+}
+@media (max-width: 767.9px) {
+  nav {
+    z-index: 10;
+    padding: 25px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .toggle {
+    display: block;
+  }
+  .open {
+    overflow: hidden;
+  }
+  .open .toggle {
+    position: fixed;
+  }
+  .open nav {
+    transition: all 333ms ease-in-out;
+    transform: none;
+  }
+}
+article {
+  display: block;
+  padding: 20px 0;
+}
+.background {
+  max-width: 100%;
+  height: auto;
+}
+main {
+  padding: 0 0 20px;
+}
+aside {
+  padding: 20px 0 0;
+  line-height: 1.1em;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 55px;
+  padding: 10px;
+  margin: 0 -20px;
+  font-size: 10px;
+  line-height: 12px;
+  background-color: #fff;
+  letter-spacing: -0.013em;
+  word-spacing: -0.15em;
+}
+a {
+  text-decoration: none;
+  color: #23304d;
+}
+a.active {
+  color: #b1aa8d;
+}
+nav ul {
+  list-style: none;
+  font-size: 18.7px;
+  line-height: 1em;
+  letter-spacing: -0.026em;
+}
+nav ul li + li {
+  margin-top: 20px;
+}
+nav ul ul li + li {
+  margin-top: 10px;
+}
+nav ul ul {
+  margin: 0 0 17px 22px;
+  line-height: 1em;
+  font-size: 16px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 333ms ease-out;
+}
+nav > ul > li > a {
+  display: inline-block;
+}
+nav > ul > li > a.active {
+  font-size: 21.3px;
+}
+nav > ul > li > a::before {
+  content: ">";
+  display: inline-block;
+  transform: rotate(90deg);
+  margin-right: 0.2em;
+}
+nav > ul > li > a.active + ul {
+  margin-top: 27px;
+  max-height: 500px;
+}
+a.active::before {
+  display: none;
+}
+
+/* Transition
+*/
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1rem;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+  .page {
+    position: relative;
+    width: 1436px;
+    height: 907px;
+    margin-top: 0;
+    margin-left: 0;
+    border: 1px solid #cbcbcb;
+    padding: 45px 0 0 53px;
+    transform: scale(clamp(0.5, var(--zoom), 2));
+    transform-origin: left top;
+    background-color: #fff;
+    overflow: hidden;
+  }
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .logo {
+    width: 244px;
+    height: 128px;
+    display: block;
+    background-image: url(../svg/PPP-Logo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  h1 + p {
+    margin-top: 30px;
+  }
+  p + p {
+    margin-top: 35px;
+  }
+  p {
+    line-height: 1.25em;
+  }
+  header {
+    width: 100%;
+    padding: 0;
+  }
+  header a {
+    display: block;
+  }
+  nav {
+    position: absolute;
+    width: 401px;
+    height: 681px;
+    border-right: 1px solid #b1aa8d;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 0 53px;
+    z-index: 1;
+    transform: none;
+    background-color: transparent;
+  }
+  article {
+    display: block;
+    height: 681px;
+    margin: 50px 0 0 401px;
+    padding: 0;
+  }
+  main {
+    width: 100%;
+  }
+  aside {
+    position: absolute;
+    bottom: 70px;
+    right: 55px;
+    width: 588px;
+    line-height: 1.1em;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 55px;
+    height: 28px;
+    font-size: 16px;
+    line-height: 28px;
+    background-color: #fff;
+    letter-spacing: -0.013em;
+    word-spacing: 0.13em;
+    margin: 0;
+  }
+  nav ul {
+    list-style: none;
+    font-size: 18.7px;
+    line-height: 1em;
+    letter-spacing: -0.026em;
+  }
+  nav ul li + li {
+    margin-top: 20px;
+  }
+  nav ul ul li + li {
+    margin-top: 10px;
+  }
+  nav ul ul {
+    line-height: 1em;
+    font-size: 16px;
+  }
+  nav > ul > li > a {
+    display: inline-block;
+  }
+  nav > ul > li > a.active {
+    font-size: 21.3px;
+  }
+  nav > ul > li > a::before {
+    content: ">";
+    display: inline-block;
+    transform: rotate(90deg);
+    margin-right: 0.2em;
+  }
+  a.active::before {
+    display: none;
+  }
+  article {
+    position: absolute;
+    transition: all 333ms ease-out;
+    opacity: 1;
+  }
+  .hiddenPage {
+    opacity: 0;
+    transform: translate(100%, 0);
+  }
+  .background {
+    display: none;
+  }
+}
