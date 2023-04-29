@@ -1,6 +1,5 @@
 <template>
   <article v-if="currentRouteName">
-    {{ currentRouteName }}
     <main>
       <h1>{{ currentRouteName[0].attributes.Title }}</h1>
       <div v-html="formatRte(currentRouteName[0].attributes.Content)"></div>
@@ -72,7 +71,6 @@ export default {
     currentRouteName() {
       if (this.data.pages == null) return false;
       let filtered_pages = this.data.pages;
-      return this.$route.params.karierre;
       return filtered_pages.filter((e) => {
         return e.attributes.Slug === this.$route.params.karierre;
       });
