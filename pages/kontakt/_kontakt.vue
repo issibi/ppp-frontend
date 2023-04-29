@@ -13,6 +13,14 @@
         v-html="formatRte(currentRouteName[0].attributes.Publications)"
       ></div>
     </main>
+    <img
+      class="background"
+      :src="
+        'https://strapi-g0fi.onrender.com' +
+        currentRouteName[0].attributes.Image_desktop.data.attributes.url
+      "
+      alt=""
+    />
     <aside>
       <div v-html="formatRte(currentRouteName[0].attributes.Hashtags)"></div>
     </aside>

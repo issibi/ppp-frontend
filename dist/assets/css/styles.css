@@ -327,16 +327,4 @@ a.active::before {
   nav ul ul ul li + li {
     margin-top: 1px;
   }
-  article {
-    position: absolute;
-    transition: all 333ms ease-out;
-    opacity: 1;
-  }
-  .hiddenPage {
-    opacity: 0;
-    transform: translate(100%, 0);
-  }
-  .background {
-    display: none;
-  }
 }
