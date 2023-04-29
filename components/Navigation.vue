@@ -93,7 +93,6 @@ export default {
     subs(id) {
       let filtered_subs = this.data.subs;
       return filtered_subs.filter((e) => {
-        console.log(e.attributes.main_category.data.id);
         return e.attributes.main_category.data.id === id;
       });
     },
