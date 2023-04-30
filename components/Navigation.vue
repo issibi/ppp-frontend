@@ -15,8 +15,7 @@
         >
           {{ category.attributes.Title }}
         </NuxtLink>
-        <ul>
-          <li v-for="(page, index) in pages(category.id)" :key="index">
+        <ul><li v-for="(page, index) in pages(category.id)" :key="index">
             <NuxtLink
               :to="'/' + category.attributes.Slug + '/' + page.attributes.Slug"
             >
@@ -39,10 +38,8 @@
                 >
                   {{ profiles.attributes.Profile_title }}
                 </NuxtLink>
-              </li>
-            </ul>
-          </li>
-        </ul>
+              </li></ul>
+          </li></ul>
       </li>
     </ul>
   </nav>

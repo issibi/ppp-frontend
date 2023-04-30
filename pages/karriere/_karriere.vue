@@ -3,7 +3,6 @@
     <main>
       <h1>{{ currentRouteName[0].attributes.Title }}</h1>
       <div v-html="formatRte(currentRouteName[0].attributes.Content)"></div>
-
       <div
         v-if="false"
         v-html="formatRte(currentRouteName[0].attributes.Examples)"

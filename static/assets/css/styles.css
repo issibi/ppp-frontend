@@ -137,6 +137,9 @@ nav ul {
   line-height: 1em;
   letter-spacing: -0.026em;
 }
+nav ul:empty {
+  display: none;
+}
 nav a {
   text-transform: uppercase;
 }
