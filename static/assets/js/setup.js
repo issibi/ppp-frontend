@@ -14,7 +14,9 @@ window.addEventListener("load", (event) => {
   window.addEventListener("resize", (event) => {
     setSize();
   });
-  document.querySelector(".toggle").addEventListener("click", () => {
-    document.body.classList.toggle("open");
-  });
+  let menu = document.querySelector(".toggle");
+  if (menu !== null)
+    menu.addEventListener("click", () => {
+      document.body.classList.toggle("open");
+    });
 });

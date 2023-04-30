@@ -178,10 +178,91 @@ a.active::before {
   display: none;
 }
 
-/* Transition
+/*Start page
 */
+.page-start {
+  background: url(../img/background-home.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.grid {
+  position: relative;
+  height: 100%;
+  padding: 10px 0 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+  gap: 20px;
+}
+.grid > * {
+  aspect-ratio: 1.11321;
+  background-color: rgb(255 255 255 / 0.92);
+  background-size: cover;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 0 1px #b1aa8d;
+}
+.grid h2 {
+  color: #b1aa8d;
+}
+.kanzlei {
+  background-image: url(../img/Home_KANZLEI.jpg);
+}
+.team {
+  background-image: url(../img/Home_TEAM.jpg);
+}
+.rechtsgebiete {
+  background-image: url(../img/Home_RECHTSGEBIETE.jpg);
+}
+.karriere {
+  background-image: url(../img/Home_KARRIERE.jpg);
+}
+.news {
+  background-image: url(../img/Home_NEWS.jpg);
+}
+.team,
+.rechtsgebiete {
+  color: #b1aa8d;
+}
+
+.page-start .logo {
+  width: 90%;
+  height: auto;
+  aspect-ratio: 1.90625;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .page-start .logo {
+    margin: 0 auto;
+  }
+}
 
 @media (min-width: 768px) {
+  .page-start .logo {
+    width: 244px;
+    height: 128px;
+    aspect-ratio: initial;
+    transform: translate(-20px, 0);
+    margin: 37px auto 0;
+  }
+  .grid {
+    padding: 0 45px 45px 0;
+    margin-left: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    gap: 45px;
+  }
+  .grid > * {
+    padding: 37px 9px 25px 37px;
+  }
   body {
     font-size: 1rem;
     position: absolute;
