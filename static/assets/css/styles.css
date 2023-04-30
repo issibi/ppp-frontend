@@ -137,6 +137,9 @@ nav ul {
   line-height: 1em;
   letter-spacing: -0.026em;
 }
+nav a {
+  text-transform: uppercase;
+}
 nav ul li + li {
   margin-top: 20px;
 }
@@ -173,6 +176,10 @@ nav > ul > li > a::before {
 nav > ul > li > a.active + ul {
   margin-top: 27px;
   max-height: 1000px;
+}
+nav ul ul a[href="javascript:void(0)"] {
+  pointer-events: none;
+  margin-bottom: 5px;
 }
 a.active::before {
   display: none;
@@ -265,6 +272,7 @@ a.active::before {
   }
   body {
     font-size: 1rem;
+    letter-spacing: -0.045em;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -303,10 +311,10 @@ a.active::before {
     background-size: cover;
   }
   h1 + p {
-    margin-top: 30px;
+    margin-top: 20px;
   }
   p + p {
-    margin-top: 35px;
+    margin-top: 20px;
   }
   p {
     line-height: 1.25em;
@@ -332,7 +340,7 @@ a.active::before {
   }
   article {
     display: block;
-    height: 681px;
+    height: 630px;
     margin: 50px 30px 0 401px;
     padding: 0;
   }
@@ -347,6 +355,7 @@ a.active::before {
     right: 55px;
     width: 588px;
     line-height: 1.1em;
+    font-size: 18px;
   }
   footer {
     position: absolute;
@@ -399,6 +408,7 @@ a.active::before {
     display: none;
   }
   nav ul ul a[href="javascript:void(0)"] {
+    pointer-events: none;
     font-size: 13px;
     color: #b1aa8d;
   }

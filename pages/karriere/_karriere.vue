@@ -72,7 +72,7 @@ export default {
       if (this.data.pages == null) return false;
       let filtered_pages = this.data.pages;
       return filtered_pages.filter((e) => {
-        return e.attributes.Slug === this.$route.params.karierre;
+        return e.attributes.Slug === this.$route.params.karriere;
       });
     },
   },

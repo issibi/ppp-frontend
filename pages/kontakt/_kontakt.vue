@@ -3,15 +3,6 @@
     <main>
       <h1>{{ currentRouteName[0].attributes.Title }}</h1>
       <div v-html="formatRte(currentRouteName[0].attributes.Content)"></div>
-
-      <div
-        v-if="false"
-        v-html="formatRte(currentRouteName[0].attributes.Examples)"
-      ></div>
-      <div
-        v-if="false"
-        v-html="formatRte(currentRouteName[0].attributes.Publications)"
-      ></div>
     </main>
     <img
       v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
