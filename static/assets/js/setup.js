@@ -19,4 +19,11 @@ window.addEventListener("load", (event) => {
     menu.addEventListener("click", () => {
       document.body.classList.toggle("open");
     });
+  setTimeout(() => {
+    let ul = document.querySelectorAll("ul");
+    ul.forEach((li) => {
+      console.log(li.children);
+      if (li.children.length === 0) li.remove();
+    });
+  }, 1000);
 });

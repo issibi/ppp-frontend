@@ -27,6 +27,7 @@ body {
   border: 0 none;
   display: none;
   z-index: 30;
+  cursor: pointer;
 }
 .toggle:focus {
   outline: none;
@@ -91,6 +92,10 @@ nav {
   }
   .open .toggle {
     position: fixed;
+  }
+  .open .toggle svg path {
+    transition: 0.2s;
+    d: path('m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z');
   }
   .open nav {
     transition: all 333ms ease-in-out;
@@ -167,6 +172,9 @@ nav ul ul ul {
 nav > ul > li > a {
   display: inline-block;
 }
+nav ul ul li a::after {
+  content: ">";
+}
 nav > ul > li > a.active {
   font-size: 21.3px;
 }
@@ -182,7 +190,12 @@ nav > ul > li > a.active + ul {
 }
 nav ul ul a[href="javascript:void(0)"] {
   pointer-events: none;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  display: block;
+  color: #b1aa8d;
+}
+nav ul ul a[href="javascript:void(0)"]::after {
+  display: none;
 }
 a.active::before {
   display: none;
@@ -391,9 +404,6 @@ a.active::before {
   nav ul ul {
     line-height: 1em;
     font-size: 16px;
-  }
-  nav ul ul li a::after {
-    content: ">";
   }
   nav > ul > li > a {
     display: inline-block;
