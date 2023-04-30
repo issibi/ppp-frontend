@@ -27,6 +27,7 @@ body {
   border: 0 none;
   display: none;
   z-index: 30;
+  cursor: pointer;
 }
 .toggle:focus {
   outline: none;
@@ -92,6 +93,10 @@ nav {
   .open .toggle {
     position: fixed;
   }
+  .open .toggle svg path {
+    transition: 0.2s;
+    d: path('m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z');
+  }
   .open nav {
     transition: all 333ms ease-in-out;
     transform: none;
@@ -137,6 +142,12 @@ nav ul {
   line-height: 1em;
   letter-spacing: -0.026em;
 }
+nav ul:empty {
+  display: none !important;
+}
+nav a {
+  text-transform: uppercase;
+}
 nav ul li + li {
   margin-top: 20px;
 }
@@ -161,6 +172,9 @@ nav ul ul ul {
 nav > ul > li > a {
   display: inline-block;
 }
+nav ul ul li a::after {
+  content: ">";
+}
 nav > ul > li > a.active {
   font-size: 21.3px;
 }
@@ -173,6 +187,15 @@ nav > ul > li > a::before {
 nav > ul > li > a.active + ul {
   margin-top: 27px;
   max-height: 1000px;
+}
+nav ul ul a[href="javascript:void(0)"] {
+  pointer-events: none;
+  margin-bottom: 10px;
+  display: block;
+  color: #b1aa8d;
+}
+nav ul ul a[href="javascript:void(0)"]::after {
+  display: none;
 }
 a.active::before {
   display: none;
@@ -265,6 +288,7 @@ a.active::before {
   }
   body {
     font-size: 1rem;
+    letter-spacing: -0.045em;
     position: absolute;
     height: 100%;
     width: 100%;
@@ -302,11 +326,8 @@ a.active::before {
     background-repeat: no-repeat;
     background-size: cover;
   }
-  h1 + p {
-    margin-top: 30px;
-  }
   p + p {
-    margin-top: 35px;
+    margin-top: 20px;
   }
   p {
     line-height: 1.25em;
@@ -332,7 +353,7 @@ a.active::before {
   }
   article {
     display: block;
-    height: 681px;
+    height: 630px;
     margin: 50px 30px 0 401px;
     padding: 0;
   }
@@ -347,6 +368,7 @@ a.active::before {
     right: 55px;
     width: 588px;
     line-height: 1.1em;
+    font-size: 18px;
   }
   footer {
     position: absolute;
@@ -380,9 +402,6 @@ a.active::before {
     line-height: 1em;
     font-size: 16px;
   }
-  nav ul ul li a::after {
-    content: ">";
-  }
   nav > ul > li > a {
     display: inline-block;
   }
@@ -399,8 +418,10 @@ a.active::before {
     display: none;
   }
   nav ul ul a[href="javascript:void(0)"] {
+    pointer-events: none;
     font-size: 13px;
     color: #b1aa8d;
+    margin-bottom: 1px;
   }
   nav ul ul ul li a {
     font-size: 13px;
