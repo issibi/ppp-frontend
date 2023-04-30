@@ -138,7 +138,7 @@ nav ul {
   letter-spacing: -0.026em;
 }
 nav ul:empty {
-  display: none;
+  display: none !important;
 }
 nav a {
   text-transform: uppercase;
