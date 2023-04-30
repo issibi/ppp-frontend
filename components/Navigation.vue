@@ -107,6 +107,14 @@ export default {
     },
   },
   async mounted() {
+    setTimeout(() => {
+      let ul = document.querySelectorAll("ul");
+      ul.forEach((li) => {
+        console.log(li.children);
+        if (li.children.length === 0) li.remove();
+      });
+    }, 1000);
+
     await this.fetchContents();
   },
   computed: {},
