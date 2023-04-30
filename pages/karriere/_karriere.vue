@@ -17,7 +17,7 @@
       v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
       class="background"
       :src="
-        'https://strapi-g0fi.onrender.com' +
+        'https://api.ppp.co.at/' +
         currentRouteName[0].attributes.Image_desktop.data.attributes.url
       "
       alt=""
@@ -48,10 +48,10 @@ export default {
   methods: {
     async fetchContents() {
       const getPages = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/pages?populate=*"
+        "https://api.ppp.co.at//api/pages?populate=*"
       );
       const getProfiles = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/profiles?populate=*"
+        "https://api.ppp.co.at//api/profiles?populate=*"
       );
       this.data.pages = getPages.data.data;
       this.data.profiles = getProfiles.data.data;

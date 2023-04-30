@@ -64,16 +64,16 @@ export default {
   methods: {
     async fetchContents() {
       const getMains = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/mains?populate=*"
+        "https://api.ppp.co.at//api/mains?populate=*"
       );
       const getSubs = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/subs?populate=*"
+        "https://api.ppp.co.at//api/subs?populate=*"
       );
       const getPages = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/pages?populate=*"
+        "https://api.ppp.co.at//api/pages?populate=*"
       );
       const getProfiles = await axios.get(
-        "https://strapi-g0fi.onrender.com/api/profiles?populate=*"
+        "https://api.ppp.co.at//api/profiles?populate=*"
       );
       this.data.mains = getMains.data.data;
       this.data.subs = getSubs.data.data;
