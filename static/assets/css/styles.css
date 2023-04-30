@@ -326,9 +326,6 @@ a.active::before {
     background-repeat: no-repeat;
     background-size: cover;
   }
-  h1 + p {
-    margin-top: 20px;
-  }
   p + p {
     margin-top: 20px;
   }
@@ -424,6 +421,7 @@ a.active::before {
     pointer-events: none;
     font-size: 13px;
     color: #b1aa8d;
+    margin-bottom: 1px;
   }
   nav ul ul ul li a {
     font-size: 13px;
