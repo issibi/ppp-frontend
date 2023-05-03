@@ -16,6 +16,26 @@ body {
   font-size: 0.85rem;
   line-height: 1.1em;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 26px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(255 255 255 / 0.5);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(216 213 203 / 0.5);
+  box-shadow: 0 0 0 3px rgb(255 255 255 / 0.5) inset;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(216 213 203 / 0.75);
+}
 .toggle {
   position: absolute;
   right: 10px;
@@ -95,7 +115,9 @@ nav {
   }
   .open .toggle svg path {
     transition: 0.2s;
-    d: path('m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z');
+    d: path(
+      "m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
+    );
   }
   .open nav {
     transition: all 333ms ease-in-out;
@@ -199,6 +221,62 @@ nav ul ul a[href="javascript:void(0)"]::after {
 }
 a.active::before {
   display: none;
+}
+.switch {
+  cursor: pointer;
+}
+table {
+  margin-bottom: 20px;
+}
+table thead {
+  display: none;
+}
+table td:first-child {
+  white-space: nowrap;
+  padding-right: 20px;
+}
+
+/*Team page
+*/
+.page-team .profile {
+  margin-bottom: 20px;
+  width: 100%;
+}
+.close {
+  cursor: pointer;
+  float: right;
+}
+@media (min-width: 768px) {
+  .page-team {
+    background: url(../img/background-team.jpg) no-repeat;
+    background-position: right center;
+    background-size: cover;
+  }
+  .page-team main {
+    width: 550px;
+    padding-right: 28px;
+    border-right: 1px solid #b1aa8d;
+  }
+  .page-team .profile {
+    position: absolute;
+    top: 234px;
+    right: 72px;
+    width: 276px;
+    height: 351px;
+    object-fit: cover;
+  }
+  .page-team aside {
+    width: 290px;
+    right: 64px;
+    bottom: 58px;
+    height: 250px;
+  }
+  .close {
+    position: absolute;
+    top: 222px;
+    right: 430px;
+    cursor: pointer;
+  }
 }
 
 /*Start page
