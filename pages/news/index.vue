@@ -1,17 +1,23 @@
 <template>
   <article :class="'show-' + show">
     <main v-if="show">
-      <time>
-        {{ new Date(newsDetail.attributes.createdAt).getFullYear() }}-{{
-          new Date(newsDetail.attributes.createdAt).getMonth() + 1
-        }}-{{ new Date(newsDetail.attributes.createdAt).getDate() }}
-      </time>
-      <h1 v-html="formatTitle(newsDetail.attributes.Title)"></h1>
-      <div v-html="formatRte(newsDetail.attributes.Text)"></div>
-      <p>
-        <br />
-        <NuxtLink to="/news/">&lt; Back</NuxtLink>
-      </p>
+      <h1>News</h1>
+      <div class="news-list">
+        <div
+          class="news-item"
+          v-for="(article, index) in sortedNews"
+          :key="index"
+        >
+          <NuxtLink :to="'/news/' + article.attributes.Slug">
+            <time>
+              {{ new Date(article.attributes.createdAt).getFullYear() }}-{{
+                new Date(article.attributes.createdAt).getMonth() + 1
+              }}-{{ new Date(article.attributes.createdAt).getDate() }}
+            </time>
+            <h2 v-html="formatTitle(article.attributes.Title)"></h2>
+          </NuxtLink>
+        </div>
+      </div>
     </main>
   </article>
 </template>
@@ -25,7 +31,6 @@ marked.use({
 });
 export default {
   name: "news",
-  layout: "news",
   data() {
     return {
       show: false,
@@ -61,13 +66,11 @@ export default {
     this.show = true;
   },
   computed: {
-    newsDetail() {
-      if (this.news == null) return false;
-      let filtered_news = this.news;
-      let article = filtered_news.filter((e) => {
-        return e.attributes.Slug === this.$route.params.news;
-      });
-      return article[0];
+    sortedNews: function () {
+      return this.news.sort(
+        (a, b) =>
+          new Date(a.attributes.createdAt) - new Date(b.attributes.createdAt)
+      );
     },
   },
 };

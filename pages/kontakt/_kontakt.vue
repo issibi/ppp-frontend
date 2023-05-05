@@ -1,33 +1,22 @@
 <template>
   <article :class="'show-' + show">
     <main v-if="show">
-      <h1>{{ currentRouteName[0].attributes.Title }}</h1>
-      <div v-html="formatRte(currentRouteName[0].attributes.Content)"></div>
-
-      <div
-        v-if="false"
-        v-html="formatRte(currentRouteName[0].attributes.Examples)"
-      ></div>
-      <div
-        v-if="false"
-        v-html="formatRte(currentRouteName[0].attributes.Publications)"
-      ></div>
+      <h1 v-html="formatTitle(getPage.attributes.Title)"></h1>
+      <div v-html="formatRte(getPage.attributes.Content)"></div>
     </main>
-
     <div v-if="show">
       <img
-        v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
+        v-if="getPage.attributes.Image_desktop.data !== null"
         class="background"
         :src="
           'https://api.ppp.co.at/' +
-          currentRouteName[0].attributes.Image_desktop.data.attributes.url
+          getPage.attributes.Image_desktop.data.attributes.url
         "
         alt=""
       />
     </div>
-
     <aside v-if="show">
-      <div v-html="formatRte(currentRouteName[0].attributes.Hashtags)"></div>
+      <div v-html="formatRte(getPage.attributes.Hashtags)"></div>
     </aside>
   </article>
 </template>
@@ -44,10 +33,7 @@ export default {
   data() {
     return {
       show: false,
-      data: {
-        pages: null,
-        profiles: null,
-      },
+      pages: null,
     };
   },
   methods: {
@@ -55,11 +41,7 @@ export default {
       const getPages = await axios.get(
         "https://api.ppp.co.at//api/pages?populate=*"
       );
-      const getProfiles = await axios.get(
-        "https://api.ppp.co.at//api/profiles?populate=*"
-      );
-      this.data.pages = getPages.data.data;
-      this.data.profiles = getProfiles.data.data;
+      this.pages = getPages.data.data;
     },
     formatRte(str) {
       if (str !== null && str !== undefined) {
@@ -68,18 +50,28 @@ export default {
         return "";
       }
     },
+    formatTitle(str) {
+      if (str !== null && str !== undefined) {
+        return str.replace(/\/n/g, "<br />");
+      } else {
+        return "";
+      }
+    },
   },
   async mounted() {
     await this.fetchContents();
+    document.body.removeAttribute("class");
+    document.body.classList.add("page-kontakt");
     this.show = true;
   },
   computed: {
-    currentRouteName() {
-      if (this.data.pages == null) return false;
-      let filtered_pages = this.data.pages;
-      return filtered_pages.filter((e) => {
+    getPage() {
+      if (this.pages == null) return false;
+      let filtered_pages = this.pages;
+      let page = filtered_pages.filter((e) => {
         return e.attributes.Slug === this.$route.params.kontakt;
       });
+      return page[0];
     },
   },
 };

@@ -8,3 +8,17 @@
     <Footer />
   </div>
 </template>
+
+<script>
+export default {
+  name: "default",
+  data() {
+    return {};
+  },
+  methods: {
+    toggleMenu() {
+      document.body.classList.toggle("open");
+    },
+  },
+}
+</script>

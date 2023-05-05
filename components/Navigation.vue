@@ -15,34 +15,49 @@
         >
           {{ category.attributes.Title }}
         </NuxtLink>
-        <ul>
-          <li v-for="(page, index) in pages(category.id)" :key="index">
-            <NuxtLink
-              :to="'/' + category.attributes.Slug + '/' + page.attributes.Slug"
-            >
-              {{ page.attributes.Title }}
-            </NuxtLink>
-          </li>
-          <li v-for="(sub, index) in subs(category.id)" :key="index">
-            <a href="javascript:void(0)">
-              {{ sub.attributes.Title }}
-            </a>
+        <div class="submenu">
+          <div>
             <ul>
-              <li v-for="(profiles, index) in profiles(sub.id)" :key="index">
+              <li v-for="(page, index) in pages(category.id)" :key="index">
                 <NuxtLink
                   :to="
-                    '/' +
-                    category.attributes.Slug +
-                    '/' +
-                    profiles.attributes.Slug
+                    '/' + category.attributes.Slug + '/' + page.attributes.Slug
                   "
                 >
-                  {{ profiles.attributes.Profile_title }}
+                  <span v-html="formatTitle(page.attributes.Title)"></span>
                 </NuxtLink>
               </li>
+              <li v-for="(sub, index) in subs(category.id)" :key="index">
+                <a href="javascript:void(0)">
+                  {{ sub.attributes.Title }}
+                </a>
+                <ul>
+                  <li
+                    v-for="(profiles, index) in profiles(sub.id)"
+                    :key="index"
+                  >
+                    <NuxtLink
+                      :to="
+                        '/' +
+                        category.attributes.Slug +
+                        '/' +
+                        profiles.attributes.Slug
+                      "
+                    >
+                      {{ profiles.attributes.Profile_title }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <NuxtLink to="/news"> News </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/kontakt"> Kontakt </NuxtLink>
       </li>
     </ul>
   </nav>
@@ -105,17 +120,16 @@ export default {
     currentRouteName(slug) {
       return Object.keys(this.$route.params)[0] == slug ? "active" : "";
     },
+    formatTitle(str) {
+      if (str !== null && str !== undefined) {
+        return str.replace(/\/n/g, "<br />");
+      } else {
+        return "";
+      }
+    },
   },
   async mounted() {
-    setTimeout(() => {
-      let ul = document.querySelectorAll("ul");
-      ul.forEach((li) => {
-        if (li.children.length === 0) li.innerHTML = "";
-      });
-    }, 1000);
-
     await this.fetchContents();
   },
-  computed: {},
 };
 </script>
