@@ -1,6 +1,6 @@
 <template>
-  <article>
-    <main>
+  <article :class="'show-' + show">
+    <main v-if="show">
       <div v-if="!showCV && !showPub && currentRouteName">
         <div
           v-html="formatRte(currentRouteName[0].attributes.Basic_info)"
@@ -131,6 +131,7 @@ export default {
   layout: "team",
   data() {
     return {
+      show: false,
       showCV: false,
       showPub: false,
       data: {
@@ -160,6 +161,7 @@ export default {
   },
   async mounted() {
     await this.fetchContents();
+    this.show = true;
   },
   computed: {
     currentRouteName() {

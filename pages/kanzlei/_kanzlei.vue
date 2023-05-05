@@ -1,28 +1,39 @@
 <template>
-  <article v-if="currentRouteName">
-    <main>
+  <article :class="'show-' + show">
+    <div v-if="show">
+      <img
+        v-if="currentRouteName[0].attributes.Image_mobile.data !== null"
+        class="background"
+        :src="
+          'https://api.ppp.co.at/' +
+          currentRouteName[0].attributes.Image_mobile.data.attributes.url
+        "
+        alt=""
+      />
+    </div>
+    <main v-if="show">
       <h1>{{ currentRouteName[0].attributes.Title }}</h1>
       <div v-html="formatRte(currentRouteName[0].attributes.Content)"></div>
-
-      <div
-        v-if="false"
-        v-html="formatRte(currentRouteName[0].attributes.Examples)"
-      ></div>
+      <div v-if="false" v-html="formatRte(currentRouteName[0].attributes.Examples)"></div>
       <div
         v-if="false"
         v-html="formatRte(currentRouteName[0].attributes.Publications)"
       ></div>
     </main>
-    <img
-      v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
-      class="background"
-      :src="
-        'https://api.ppp.co.at/' +
-        currentRouteName[0].attributes.Image_desktop.data.attributes.url
-      "
-      alt=""
-    />
-    <aside>
+
+    <div v-if="show">
+      <img
+        v-if="currentRouteName[0].attributes.Image_desktop.data !== null"
+        class="background"
+        :src="
+          'https://api.ppp.co.at/' +
+          currentRouteName[0].attributes.Image_desktop.data.attributes.url
+        "
+        alt=""
+      />
+    </div>
+
+    <aside v-if="show">
       <div v-html="formatRte(currentRouteName[0].attributes.Hashtags)"></div>
     </aside>
   </article>
@@ -39,6 +50,7 @@ export default {
   name: "kanzlei",
   data() {
     return {
+      show: false,
       data: {
         pages: null,
         profiles: null,
@@ -66,6 +78,7 @@ export default {
   },
   async mounted() {
     await this.fetchContents();
+    this.show = true;
   },
   computed: {
     currentRouteName() {

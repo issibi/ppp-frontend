@@ -110,8 +110,7 @@ export default {
     setTimeout(() => {
       let ul = document.querySelectorAll("ul");
       ul.forEach((li) => {
-        console.log(li.children);
-        if (li.children.length === 0) li.remove();
+        if (li.children.length === 0) li.innerHTML = "";
       });
     }, 1000);
 
