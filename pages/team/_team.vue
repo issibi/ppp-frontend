@@ -11,16 +11,9 @@
         <br />
       </div>
       <img
-        v-if="
-          currentRouteName &&
-          currentRouteName[0].attributes.Profile_image.data !== null
-        "
-        class="profile"
-        :src="
-          'https://api.ppp.co.at/' +
-          currentRouteName[0].attributes.Profile_image.data.attributes.url
-        "
+        src="~/static/assets/img/background-team.jpg"
         alt=""
+        class="background"
       />
       <div v-if="!showCV && !showPub && currentRouteName">
         <div
@@ -90,6 +83,18 @@
         ></div>
       </div>
     </main>
+    <img
+      v-if="
+        currentRouteName &&
+        currentRouteName[0].attributes.Profile_image.data !== null
+      "
+      class="profile"
+      :src="
+        'https://api.ppp.co.at/' +
+        currentRouteName[0].attributes.Profile_image.data.attributes.url
+      "
+      alt=""
+    />
     <aside>
       <div v-if="(showCV || showPub) && currentRouteName">
         <div

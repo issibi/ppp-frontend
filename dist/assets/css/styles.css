@@ -38,7 +38,7 @@ body {
 }
 .toggle {
   position: absolute;
-  right: 10px;
+  right: -10px;
   top: 10px;
   display: block;
   background-color: transparent;
@@ -84,6 +84,7 @@ p {
 }
 header {
   width: 100%;
+  position: relative;
 }
 header a {
   display: block;
@@ -97,33 +98,7 @@ nav {
   bottom: 0;
   left: 0;
 }
-@media (max-width: 767.9px) {
-  nav {
-    z-index: 10;
-    padding: 25px;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-  .toggle {
-    display: block;
-  }
-  .open {
-    overflow: hidden;
-  }
-  .open .toggle {
-    position: fixed;
-  }
-  .open .toggle svg path {
-    transition: 0.2s;
-    d: path(
-      "m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
-    );
-  }
-  .open nav {
-    transition: all 333ms ease-in-out;
-    transform: none;
-  }
-}
+
 article {
   display: block;
   padding: 20px 0;
@@ -253,11 +228,6 @@ main ul li + li {
   float: right;
 }
 @media (min-width: 768px) {
-  .page-team {
-    background: url(../img/background-team.jpg) no-repeat;
-    background-position: right center;
-    background-size: cover;
-  }
   .page-team main {
     width: 550px;
     padding-right: 28px;
@@ -597,13 +567,64 @@ main ul li + li {
   .page-enter-to .background {
     transition-duration: 0;
   }
+  .page-leave-to .profile,
+  .page-enter-to .profile,
   .page-leave-to aside,
   .page-enter-to aside {
     opacity: 0;
   }
+  .profile,
   aside,
   main,
   .background {
     transition: all 500ms ease-in;
+  }
+}
+
+@media (max-width: 767.9px) {
+  nav {
+    z-index: 10;
+    padding: 25px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  header::before {
+    content: "";
+    background-color: #fff;
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    right: -20px;
+    bottom: -10px;
+    z-index: -1;
+  }
+  .toggle {
+    display: block;
+  }
+  .open {
+    overflow: hidden;
+  }
+  .open .toggle {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+  }
+  .open .toggle svg path {
+    transition: 0.2s;
+    d: path(
+      "m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
+    );
+  }
+  .open nav {
+    transition: all 333ms ease-in-out;
+    transform: none;
+  }
+  article {
+    display: flex;
+    flex-direction: column;
+  }
+  .background,
+  .profile {
+    order: 0;
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <header>
     <a class="logo" href="/"></a>
-    <button class="toggle">
+    <button class="toggle" @click="toggleMenu">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="48"
@@ -16,3 +16,16 @@
     </button>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+  methods: {
+    toggleMenu() {
+      document.body.classList.toggle("open");
+    },
+  },
+};
+</script>
