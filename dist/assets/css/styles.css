@@ -77,7 +77,8 @@ h2 {
   line-height: 1em;
   font-weight: 400;
 }
-h1 + div {
+h1 + div,
+h1 + ul {
   margin-top: 20px;
 }
 p + p {
@@ -234,17 +235,29 @@ main ul li + li {
   cursor: pointer;
   float: right;
 }
+.detail {
+  background-color: white;
+  width: 504px;
+  border-right: 1px solid #b1aa8d;
+  height: 654px;
+  overflow-x: hidden;
+  overflow-y: visible;
+  padding-right: 26px;
+}
 @media (min-width: 768px) {
   body {
     background: #f1f1f1;
   }
-
   .page-team .page {
     background: url(../img/background-team.jpg) no-repeat right center;
     background-size: cover;
   }
+  .page-team .close {
+    top: 223px;
+    z-index: 10;
+  }
   .page-team main {
-    width: 550px;
+    width: 504px;
     padding-right: 28px;
     border-right: 1px solid #b1aa8d;
   }
@@ -264,12 +277,13 @@ main ul li + li {
   }
   .close {
     position: absolute;
-    top: 222px;
-    right: 430px;
+    top: 0;
+    right: 483px;
     cursor: pointer;
     width: 18px;
   }
   .close svg {
+    display: block;
     width: 100%;
     height: auto;
   }
@@ -444,7 +458,7 @@ time {
     padding: 37px 9px 25px 37px;
   }
   body {
-    font-size: 1rem;
+    font-size: 20px;
     letter-spacing: -0.045em;
     position: absolute;
     height: 100%;
@@ -526,18 +540,21 @@ time {
   }
   article {
     display: block;
-    height: 630px;
-    margin: 50px 30px 0 401px;
-    padding: 0;
+    height: 654px;
+    margin: 50px 0 0 348px;
+    padding: 0 0 0 46px;
   }
   main {
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
     overflow-y: auto;
+    padding: 0;
+    position: relative;
   }
   aside {
     position: absolute;
-    bottom: 70px;
+    bottom: 81px;
     right: 55px;
     width: 588px;
     line-height: 1.1em;
@@ -648,6 +665,13 @@ time {
   .show-true aside {
     transition-delay: 333ms;
     opacity: 1;
+  }
+  .menu {
+    font-size: 16px;
+    margin-top: 20px;
+    line-height: 30px;
+    position: absolute;
+    bottom: 50px;
   }
 }
 
