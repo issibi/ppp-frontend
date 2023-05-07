@@ -1,6 +1,17 @@
 <template>
   <article :class="'show-' + show">
     <main v-if="show">
+      <Transition>
+        <img
+          v-if="getPage.attributes.Image_mobile.data !== null"
+          class="background-mobile"
+          :src="
+            'https://api.ppp.co.at/' +
+            getPage.attributes.Image_mobile.data.attributes.url
+          "
+          alt=""
+        />
+      </Transition>
       <h1 v-html="formatTitle(getPage.attributes.Title)"></h1>
       <div v-html="formatRte(getPage.attributes.Content)"></div>
     </main>
@@ -39,7 +50,7 @@ export default {
   methods: {
     async fetchContents() {
       const getPages = await axios.get(
-        "https://api.ppp.co.at//api/pages?populate=*"
+        "https://api.ppp.co.at/api/pages?populate=*"
       );
       this.pages = getPages.data.data;
     },

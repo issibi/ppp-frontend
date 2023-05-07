@@ -1,12 +1,12 @@
 <template>
   <div class="grid">
-    <div>
-      <a href="/" class="logo"></a>
+    <NuxtLink to="/kanzlei/ueber-uns" class="">
+      <span class="logo"></span>
       <p>
         Als Wirtschaftsanwälte haben wir vieles erreicht. Jetzt wollen wir
         weitergeben, was uns erfolgreich gemacht hat.
       </p>
-    </div>
+    </NuxtLink>
     <NuxtLink to="/kanzlei/ueber-uns" class="kanzlei">
       <h2>KANZLEI</h2>
       <p>
@@ -31,14 +31,14 @@
         nicht nachvollziehbarer Begeisterung.
       </p>
     </NuxtLink>
-    <NuxtLink to="/karierre/haltung" class="karriere">
+    <NuxtLink to="/karriere/haltung" class="karriere">
       <h2>KARRIERE</h2>
       <p>
         Egal wo Sie „einmal hin wollen“ – wir sind die Kaderschmiede für die
         Top- Wirtschaftsanwält*innen von Morgen.
       </p>
     </NuxtLink>
-    <NuxtLink to="/news/news" class="news">
+    <NuxtLink to="/news/" class="news">
       <h2>NEWS</h2>
       <p>
         3 Veranstaltungen im Mai / VWGH Entscheidung / 2 neue Mitarbeiter*innen

@@ -10,7 +10,7 @@
       <div v-html="formatRte(newsDetail.attributes.Text)"></div>
       <p>
         <br />
-        <NuxtLink to="/news/">&lt; Back</NuxtLink>
+        <NuxtLink to="/news/">&lt; Zurück</NuxtLink>
       </p>
     </main>
   </article>

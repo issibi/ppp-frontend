@@ -2,6 +2,17 @@
   <article :class="'show-' + show">
     <main v-if="show">
       <Transition>
+        <img
+          v-if="getPage.attributes.Image_mobile.data !== null"
+          class="background-mobile"
+          :src="
+            'https://api.ppp.co.at/' +
+            getPage.attributes.Image_mobile.data.attributes.url
+          "
+          alt=""
+        />
+      </Transition>
+      <Transition>
         <a
           v-if="showEx || showPub"
           class="close"

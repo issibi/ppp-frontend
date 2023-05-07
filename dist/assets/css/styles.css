@@ -118,6 +118,12 @@ main {
 aside {
   padding: 20px 0 0;
   line-height: 1.1em;
+  text-align: right;
+  word-spacing: 6px;
+}
+.page-team aside {
+  text-align: left;
+  word-spacing: 0;
 }
 footer {
   display: flex;
@@ -193,6 +199,12 @@ nav > ul > li > a::before {
   margin-top: 27px;
   grid-template-rows: 1fr;
 }
+.menu {
+  margin-top: 20px;
+}
+.menu a {
+  text-decoration: none;
+}
 nav ul ul a[href="javascript:void(0)"] {
   pointer-events: none;
   margin-bottom: 10px;
@@ -214,6 +226,9 @@ table {
 table thead {
   display: none;
 }
+table td {
+  vertical-align: top;
+}
 table td:first-child {
   white-space: nowrap;
   padding-right: 20px;
@@ -225,6 +240,9 @@ main ul {
 main ul li + li {
   margin-top: 5px;
 }
+main a {
+  text-decoration: underline;
+}
 /*Team page
 */
 .page-team .profile {
@@ -235,18 +253,19 @@ main ul li + li {
   cursor: pointer;
   float: right;
 }
-.detail {
-  background-color: white;
-  width: 504px;
-  border-right: 1px solid #b1aa8d;
-  height: 654px;
-  overflow-x: hidden;
-  overflow-y: visible;
-  padding-right: 26px;
-}
+
 @media (min-width: 768px) {
   body {
     background: #f1f1f1;
+  }
+  .detail {
+    background-color: white;
+    width: 504px;
+    border-right: 1px solid #b1aa8d;
+    height: 654px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-right: 26px;
   }
   .page-team .page {
     background: url(../img/background-team.jpg) no-repeat right center;
@@ -274,6 +293,7 @@ main ul li + li {
     right: 64px;
     bottom: 58px;
     height: 250px;
+    text-align: left;
   }
   .close {
     position: absolute;
@@ -291,8 +311,8 @@ main ul li + li {
 
 /*Start page
 */
-.page-start {
-  background: url(../img/background-home.jpg) no-repeat;
+.page.page-start {
+  background: url(../img/background-home-mobile.jpg) no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -436,7 +456,7 @@ time {
   .background-mobile {
     display: none;
   }
-  .page-start {
+  .page.page-start {
     background: url(../img/background-home.jpg) no-repeat;
   }
   .page-start .logo {
