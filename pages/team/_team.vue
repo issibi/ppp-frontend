@@ -130,6 +130,7 @@ export default {
   layout: "team",
   data() {
     return {
+      title: "PPP",
       show: false,
       showCV: false,
       showPub: false,
@@ -171,8 +172,22 @@ export default {
       let profile = filtered_profiles.filter((e) => {
         return e.attributes.Slug === this.$route.params.team;
       });
+      this.title =
+        "PPP - " + profile[0].attributes.Profile_title.replace(/\/n/g, "");
       return profile[0];
     },
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.title,
+        },
+      ],
+    };
   },
 };
 </script>

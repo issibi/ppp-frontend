@@ -37,6 +37,9 @@ export default {
       news: null,
     };
   },
+  head: {
+    title: "PPP - NEWS",
+  },
   methods: {
     async fetchContents() {
       const getNews = await axios.get(

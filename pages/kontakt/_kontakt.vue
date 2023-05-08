@@ -43,6 +43,7 @@ export default {
   name: "kontakt",
   data() {
     return {
+      title: "PPP",
       show: false,
       pages: null,
     };
@@ -82,8 +83,21 @@ export default {
       let page = filtered_pages.filter((e) => {
         return e.attributes.Slug === this.$route.params.kontakt;
       });
+      this.title = "PPP - " + page[0].attributes.Title.replace(/\/n/g, "");
       return page[0];
     },
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.title,
+        },
+      ],
+    };
   },
 };
 </script>

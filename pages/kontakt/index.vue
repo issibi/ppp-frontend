@@ -18,6 +18,7 @@ export default {
   name: "kontakt",
   data() {
     return {
+      title: "PPP - KONTAKT",
       show: false,
       contact: null,
     };

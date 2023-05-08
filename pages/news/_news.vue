@@ -28,6 +28,7 @@ export default {
   layout: "news",
   data() {
     return {
+      title: "",
       show: false,
       news: null,
     };
@@ -67,8 +68,21 @@ export default {
       let article = filtered_news.filter((e) => {
         return e.attributes.Slug === this.$route.params.news;
       });
+      this.title = "PPP - " + article[0].attributes.Title.replace(/\/n/g, "");
       return article[0];
     },
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.title,
+        },
+      ],
+    };
   },
 };
 </script>

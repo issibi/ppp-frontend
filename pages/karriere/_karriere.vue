@@ -129,6 +129,7 @@ export default {
   name: "karriere",
   data() {
     return {
+      title: "PPP",
       showEx: false,
       showPub: false,
       show: false,
@@ -170,8 +171,21 @@ export default {
       let page = filtered_pages.filter((e) => {
         return e.attributes.Slug === this.$route.params.karriere;
       });
+      this.title = "PPP - " + page[0].attributes.Title.replace(/\/n/g, "");
       return page[0];
     },
+  },
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: this.title,
+        },
+      ],
+    };
   },
 };
 </script>
