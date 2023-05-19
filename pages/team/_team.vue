@@ -78,7 +78,31 @@
       <Transition>
         <div v-if="showPub">
           <h1>PUBLIKATIONEN</h1>
-          <div v-html="formatRte(showProfile.attributes.Publications)"></div>
+          <div
+            class="downloads"
+            v-if="showProfile.attributes.Downloads !== null"
+          >
+            <template v-for="download in showProfile.attributes.Downloads">
+              <template v-if="download.Pdf.data !== null">
+                <a
+                  :key="download.id"
+                  :href="
+                    'https://api.ppp.co.at/' + download.Pdf.data.attributes.url
+                  "
+                  target="_blank"
+                >
+                  <div v-html="download.Description"></div>
+                </a>
+              </template>
+              <template v-else>
+                <div :key="download.id" v-html="download.Description"></div>
+              </template>
+            </template>
+          </div>
+          <div
+            v-else
+            v-html="formatRte(showProfile.attributes.Publications)"
+          ></div>
         </div>
       </Transition>
     </main>
@@ -140,7 +164,7 @@ export default {
   methods: {
     async fetchContents() {
       const getProfiles = await axios.get(
-        "https://api.ppp.co.at//api/profiles?populate=*"
+        "https://api.ppp.co.at//api/profiles?populate=deep"
       );
       this.profiles = getProfiles.data.data;
     },

@@ -27,8 +27,7 @@
     >
       <h2>RECHTSGEBIETE</h2>
       <p>
-        Spezialistentum beginnt aus Zufall, wächst durch Erfahrung und endet in
-        nicht nachvollziehbarer Begeisterung.
+        Spezialistentum beginnt aus Zufall, wächst durch Erfahrung und endet in nicht immer nachvollziehbarer Begeisterung.
       </p>
     </NuxtLink>
     <NuxtLink to="/karriere/haltung" class="karriere">

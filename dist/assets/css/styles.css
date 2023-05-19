@@ -74,7 +74,7 @@ main {
 h1,
 h2 {
   font-size: 21.3px;
-  line-height: 1em;
+  line-height: 1.25em;
   font-weight: 400;
 }
 h1 + div,
@@ -143,6 +143,9 @@ a {
 }
 a.active {
   color: #b1aa8d;
+}
+footer a.active {
+  color: #23304d;
 }
 nav ul {
   list-style: none;
@@ -434,6 +437,15 @@ time {
 .background-mobile {
   max-width: calc(100% + 40px);
   margin: -10px -20px 20px;
+}
+.downloads {
+  margin-top: 20px;
+}
+.downloads p {
+  margin-bottom: 20px;
+}
+.downloads a {
+  display: block;
 }
 
 @media (min-width: 576px) {

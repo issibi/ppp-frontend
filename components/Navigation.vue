@@ -56,9 +56,6 @@
       <li>
         <NuxtLink to="/news"> News </NuxtLink>
       </li>
-      <li>
-        <NuxtLink to="/kontakt"> Kontakt </NuxtLink>
-      </li>
     </ul>
   </nav>
 </template>
