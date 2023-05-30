@@ -27,7 +27,8 @@
     >
       <h2>RECHTSGEBIETE</h2>
       <p>
-        Spezialistentum beginnt aus Zufall, wächst durch Erfahrung und endet in nicht immer nachvollziehbarer Begeisterung.
+        Spezialistentum beginnt aus Zufall, wächst durch Erfahrung und endet in
+        nicht immer nachvollziehbarer Begeisterung.
       </p>
     </NuxtLink>
     <NuxtLink to="/karriere/haltung" class="karriere">
@@ -40,17 +41,64 @@
     <NuxtLink to="/news/" class="news">
       <h2>NEWS</h2>
       <p>
-        3 Veranstaltungen im Mai / VWGH Entscheidung / 2 neue Mitarbeiter*innen
-        / 7. Energy Law Event in Paris
+        <span
+          class="news-item"
+          v-for="(article, index) in sortedNews"
+          :key="index"
+        >
+          <NuxtLink :to="'/news/' + article.attributes.Slug">
+            <span v-html="formatTitle(article.attributes.Title)"></span> /
+          </NuxtLink>
+        </span>
       </p>
+      <!-- 3 Veranstaltungen im Mai / VWGH Entscheidung / 2 neue Mitarbeiter*innen /
+      7. Energy Law Event in Paris -->
     </NuxtLink>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "IndexPage",
   layout: "start",
-  setup() {},
+  data() {
+    return {
+      title: "",
+      show: false,
+      news: null,
+    };
+  },
+  computed: {
+    sortedNews: function () {
+      if (this.news) {
+        return this.news.sort(
+          (a, b) =>
+            new Date(a.attributes.createdAt) - new Date(b.attributes.createdAt)
+        );
+      }
+    },
+  },
+
+  methods: {
+    async fetchContents() {
+      const getNews = await axios.get(
+        "https://api.ppp.co.at/api/news?populate=*"
+      );
+      this.news = getNews.data.data;
+    },
+
+    formatTitle(str) {
+      if (str !== null && str !== undefined) {
+        return str.replace(/\/n/g, "<br />");
+      } else {
+        return "";
+      }
+    },
+  },
+  async mounted() {
+    await this.fetchContents();
+    this.show = true;
+  },
 };
 </script>
