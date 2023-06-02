@@ -47,7 +47,13 @@
           :key="index"
         >
           <NuxtLink :to="'/news/' + article.attributes.Slug">
-            <span v-html="formatTitle(article.attributes.Title)"></span> /
+            <span v-html="formatTitle(article.attributes.Title)"></span>
+            <span
+              class="dropdown-divider"
+              v-if="index !== sortedNews.length - 1"
+            >
+              |
+            </span>
           </NuxtLink>
         </span>
       </p>
@@ -72,10 +78,10 @@ export default {
   computed: {
     sortedNews: function () {
       if (this.news) {
-        return this.news.sort(
-          (a, b) =>
-            new Date(a.attributes.createdAt) - new Date(b.attributes.createdAt)
+        var sorted_list = this.news.sort(
+          (b, a) => new Date(a.attributes.Datum) - new Date(b.attributes.Datum)
         );
+        return sorted_list.slice(0, 3);
       }
     },
   },
@@ -90,7 +96,9 @@ export default {
 
     formatTitle(str) {
       if (str !== null && str !== undefined) {
-        return str.replace(/\/n/g, "<br />");
+        var titel_str = str.replace(/\/n/g, "<br />");
+        // https://stackoverflow.com/questions/5454235/shorten-string-without-cutting-words-in-javascript
+        return titel_str.replace(/^(.{40}[^\s]*).*/, "$1") + " ...";
       } else {
         return "";
       }
