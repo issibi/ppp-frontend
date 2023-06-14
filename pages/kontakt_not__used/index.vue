@@ -23,9 +23,12 @@ export default {
       contact: null,
     };
   },
+
   methods: {
     async fetchContents() {
-      const getContact = await axios.get("https://api.ppp.co.at//api/pages/22");
+      const getContact = await axios.get(
+        "https://api.ppp.co.at//api/pages/22?locale=" + this.$i18n.locale
+      );
       this.contact = getContact.data.data;
     },
     formatRte(str) {

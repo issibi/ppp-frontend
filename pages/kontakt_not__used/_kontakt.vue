@@ -51,7 +51,7 @@ export default {
   methods: {
     async fetchContents() {
       const getPages = await axios.get(
-        "https://api.ppp.co.at/api/pages?populate=*"
+        "https://api.ppp.co.at/api/pages?populate=*&locale=" + this.$i18n.locale
       );
       this.pages = getPages.data.data;
     },
@@ -81,7 +81,7 @@ export default {
       if (this.pages == null) return false;
       let filtered_pages = this.pages;
       let page = filtered_pages.filter((e) => {
-        return e.attributes.Slug === this.$route.params.kontakt;
+        return e.attributes.Slug === this.$route.fullPath.split("/").at(-1);
       });
       this.title = "PPP - " + page[0].attributes.Title.replace(/\/n/g, "");
       return page[0];

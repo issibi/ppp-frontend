@@ -8,7 +8,7 @@
           v-for="(article, index) in sortedNews"
           :key="index"
         >
-          <NuxtLink :to="'/news/' + article.attributes.Slug">
+          <NuxtLink :to="localePath('/news/' + article.attributes.Slug)">
             <time>
               {{ new Date(article.attributes.createdAt).getFullYear() }}-{{
                 new Date(article.attributes.createdAt).getMonth() + 1
@@ -24,11 +24,7 @@
 
 <script>
 import axios from "axios";
-import { marked } from "marked";
-marked.use({
-  gfm: true,
-  breaks: true,
-});
+
 export default {
   name: "news",
   data() {
@@ -43,7 +39,7 @@ export default {
   methods: {
     async fetchContents() {
       const getNews = await axios.get(
-        "https://api.ppp.co.at/api/news?populate=*"
+        "https://api.ppp.co.at/api/news?populate=*&locale=" + this.$i18n.locale
       );
       this.news = getNews.data.data;
     },

@@ -5,12 +5,14 @@
         <NuxtLink
           :class="currentRouteName(category.attributes.Slug)"
           :to="
-            '/' +
-            category.attributes.Slug +
-            '/' +
-            (category.attributes.page.data !== null
-              ? category.attributes.page.data.attributes.Slug
-              : category.attributes.profile.data.attributes.Slug)
+            localePath(
+              '/' +
+                category.attributes.Slug +
+                '/' +
+                (category.attributes.page.data !== null
+                  ? category.attributes.page.data.attributes.Slug
+                  : category.attributes.profile.data.attributes.Slug)
+            )
           "
         >
           {{ category.attributes.Title }}
@@ -21,7 +23,12 @@
               <li v-for="(page, index) in pages(category.id)" :key="index">
                 <NuxtLink
                   :to="
-                    '/' + category.attributes.Slug + '/' + page.attributes.Slug
+                    localePath(
+                      '/' +
+                        category.attributes.Slug +
+                        '/' +
+                        page.attributes.Slug
+                    )
                   "
                 >
                   <span v-html="formatTitle(page.attributes.Title)"></span>
@@ -38,10 +45,12 @@
                   >
                     <NuxtLink
                       :to="
-                        '/' +
-                        category.attributes.Slug +
-                        '/' +
-                        profiles.attributes.Slug
+                        localePath(
+                          '/' +
+                            category.attributes.Slug +
+                            '/' +
+                            profiles.attributes.Slug
+                        )
                       "
                     >
                       {{ profiles.attributes.Profile_title }}
@@ -54,7 +63,7 @@
         </div>
       </li>
       <li>
-        <NuxtLink to="/news"> News </NuxtLink>
+        <NuxtLink :to="localePath('news')"> News </NuxtLink>
       </li>
     </ul>
   </nav>
@@ -73,19 +82,23 @@ export default {
       },
     };
   },
+
   methods: {
     async fetchContents() {
       const getMains = await axios.get(
-        "https://api.ppp.co.at//api/mains?populate=*"
+        "https://api.ppp.co.at//api/mains?populate=*&locale=" +
+          this.$i18n.locale
       );
       const getSubs = await axios.get(
-        "https://api.ppp.co.at//api/subs?populate=*"
+        "https://api.ppp.co.at//api/subs?populate=*&locale=" + this.$i18n.locale
       );
       const getPages = await axios.get(
-        "https://api.ppp.co.at//api/pages?populate=*"
+        "https://api.ppp.co.at//api/pages?populate=*&locale=" +
+          this.$i18n.locale
       );
       const getProfiles = await axios.get(
-        "https://api.ppp.co.at//api/profiles?populate=*"
+        "https://api.ppp.co.at//api/profiles?populate=*&locale=" +
+          this.$i18n.locale
       );
       this.data.mains = getMains.data.data;
       this.data.subs = getSubs.data.data;
@@ -115,7 +128,9 @@ export default {
       });
     },
     currentRouteName(slug) {
-      return Object.keys(this.$route.params)[0] == slug ? "active" : "";
+      //console.log(this.$route.fullPath.split("/").at(-2));
+      return this.$route.fullPath.split("/").at(-2) == slug ? "active" : "";
+      //return Object.keys(this.$route.params)[0] == slug ? "active" : "";
     },
     formatTitle(str) {
       if (str !== null && str !== undefined) {
@@ -127,6 +142,7 @@ export default {
   },
   async mounted() {
     await this.fetchContents();
+    this.lang = this.$i18n.locale;
   },
 };
 </script>

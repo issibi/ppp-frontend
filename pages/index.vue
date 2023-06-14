@@ -1,44 +1,43 @@
 <template>
   <div class="grid">
-    <NuxtLink to="/kanzlei/ueber-uns" class="">
+    <NuxtLink :to="localePath({ name: 'kanzlei', params: { slug: kanzlei } })">
       <span class="logo"></span>
-      <p>
-        Als Wirtschaftsanwälte haben wir vieles erreicht. Jetzt wollen wir
-        weitergeben, was uns erfolgreich gemacht hat.
-      </p>
-    </NuxtLink>
-    <NuxtLink to="/kanzlei/ueber-uns" class="kanzlei">
-      <h2>KANZLEI</h2>
-      <p>
-        Wer wir sind, sieht man an denen, die uns ihr Vertrauen schenken über
-        viele Jahre und Jahrzehnte.
-      </p>
-    </NuxtLink>
-    <NuxtLink to="/team/dr-peter-m-polak-ll-m" class="team">
-      <h2>TEAM</h2>
-      <p>
-        Es teamworkt. Horizontal wie vertikal: wir hieven einander höher. Die
-        Gedankenbälle fliegen wie beim Vierertischtennis.
-      </p>
+      <p v-html="$t('ppp')"></p>
     </NuxtLink>
     <NuxtLink
-      to="/rechtsgebiete/gesellschaftsrecht-mergers-and-acquisitions"
+      :to="localePath({ name: 'kanzlei', params: { slug: kanzlei } })"
+      class="kanzlei"
+    >
+      <h2>KANZLEI</h2>
+      <p v-html="$t('kanzlei')"></p>
+    </NuxtLink>
+    <NuxtLink
+      :to="localePath({ name: 'team', params: { slug: team } })"
+      class="team"
+    >
+      <h2>TEAM</h2>
+      <p v-html="$t('team')"></p>
+    </NuxtLink>
+
+    <NuxtLink
+      :to="
+        localePath({ name: 'rechtsgebiete', params: { slug: rechtsgebiete } })
+      "
       class="rechtsgebiete"
     >
       <h2>RECHTSGEBIETE</h2>
-      <p>
-        Spezialistentum beginnt aus Zufall, wächst durch Erfahrung und endet in
-        nicht immer nachvollziehbarer Begeisterung.
-      </p>
+      <p v-html="$t('rechtsgebiete')"></p>
     </NuxtLink>
-    <NuxtLink to="/karriere/haltung" class="karriere">
+    <!-- <NuxtLink to="/karriere/haltung" class="karriere"> -->
+    <NuxtLink
+      :to="localePath({ name: 'karriere', params: { slug: karriere } })"
+      class="karriere"
+    >
       <h2>KARRIERE</h2>
-      <p>
-        Egal wo Sie „einmal hin wollen“ – wir sind die Kaderschmiede für die
-        Top- Wirtschaftsanwält*innen von Morgen.
-      </p>
+      <p v-html="$t('karriere')"></p>
     </NuxtLink>
-    <NuxtLink to="/news/" class="news">
+    <!-- <NuxtLink to="/news/" class="news"> -->
+    <NuxtLink :to="localePath({ name: 'news' })" class="news">
       <h2>NEWS</h2>
       <p>
         <span
@@ -46,7 +45,7 @@
           v-for="(article, index) in sortedNews"
           :key="index"
         >
-          <NuxtLink :to="'/news/' + article.attributes.Slug">
+          <NuxtLink :to="localePath('/news/' + article.attributes.Slug)">
             <span v-html="formatTitle(article.attributes.Title)"></span>
             <span
               class="dropdown-divider"
@@ -57,8 +56,6 @@
           </NuxtLink>
         </span>
       </p>
-      <!-- 3 Veranstaltungen im Mai / VWGH Entscheidung / 2 neue Mitarbeiter*innen /
-      7. Energy Law Event in Paris -->
     </NuxtLink>
   </div>
 </template>
@@ -68,6 +65,7 @@ import axios from "axios";
 export default {
   name: "IndexPage",
   layout: "start",
+
   data() {
     return {
       title: "",
@@ -75,7 +73,32 @@ export default {
       news: null,
     };
   },
+
   computed: {
+    kanzlei() {
+      const { locale } = this.$i18n;
+      return locale === "de" ? "ueber-uns" : "about-us";
+    },
+
+    team() {
+      const { locale } = this.$i18n;
+      return locale === "de"
+        ? "dr-peter-m-polak-ll-m"
+        : "dr-peter-m-polak-ll-m-en";
+    },
+
+    rechtsgebiete() {
+      const { locale } = this.$i18n;
+      return locale === "de"
+        ? "gesellschaftsrecht-mergers-and-acquisitions"
+        : "corporate-law-n-mergers-and-acquisitions";
+    },
+
+    karriere() {
+      const { locale } = this.$i18n;
+      return locale === "de" ? "haltung" : "holding";
+    },
+
     sortedNews: function () {
       if (this.news) {
         var sorted_list = this.news.sort(
@@ -89,7 +112,7 @@ export default {
   methods: {
     async fetchContents() {
       const getNews = await axios.get(
-        "https://api.ppp.co.at/api/news?populate=*"
+        "https://api.ppp.co.at/api/news?populate=*&locale=" + this.$i18n.locale
       );
       this.news = getNews.data.data;
     },

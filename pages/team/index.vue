@@ -164,7 +164,8 @@ export default {
   methods: {
     async fetchContents() {
       const getProfiles = await axios.get(
-        "https://api.ppp.co.at//api/profiles?populate=deep"
+        "https://api.ppp.co.at//api/profiles?populate=deep&locale=" +
+          this.$i18n.locale
       );
       this.profiles = getProfiles.data.data;
     },
@@ -194,7 +195,7 @@ export default {
       if (this.profiles == null) return false;
       let filtered_profiles = this.profiles;
       let profile = filtered_profiles.filter((e) => {
-        return e.attributes.Slug === this.$route.params.team;
+        return e.attributes.Slug === this.$route.fullPath.split("/").at(-1);
       });
       this.title =
         "PPP - " + profile[0].attributes.Profile_title.replace(/\/n/g, "");
