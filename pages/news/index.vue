@@ -10,9 +10,9 @@
         >
           <NuxtLink :to="localePath('/news/' + article.attributes.Slug)">
             <time>
-              {{ new Date(article.attributes.createdAt).getFullYear() }}-{{
-                new Date(article.attributes.createdAt).getMonth() + 1
-              }}-{{ new Date(article.attributes.createdAt).getDate() }}
+              {{ new Date(article.attributes.Datum).getFullYear() }}-{{
+                new Date(article.attributes.Datum).getMonth() + 1
+              }}-{{ new Date(article.attributes.Datum).getDate() }}
             </time>
             <h2 v-html="formatTitle(article.attributes.Title)"></h2>
           </NuxtLink>

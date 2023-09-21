@@ -2,9 +2,9 @@
   <article :class="'show-' + show">
     <main v-if="show">
       <time>
-        {{ new Date(newsDetail.attributes.createdAt).getFullYear() }}-{{
-          new Date(newsDetail.attributes.createdAt).getMonth() + 1
-        }}-{{ new Date(newsDetail.attributes.createdAt).getDate() }}
+        {{ new Date(newsDetail.attributes.Datum).getFullYear() }}-{{
+          new Date(newsDetail.attributes.Datum).getMonth() + 1
+        }}-{{ new Date(newsDetail.attributes.Datum).getDate() }}
       </time>
       <h1 v-html="formatTitle(newsDetail.attributes.Title)"></h1>
       <div v-html="newsDetail.attributes.Text"></div>

@@ -88,14 +88,14 @@
             class="switch"
             v-if="getPage.attributes.Examples"
             @click="showEx = !showEx"
-            >BEISPIELE ></a
+            >{{$t('beispiele')}}  ></a
           >
           <br />
           <a
             class="switch"
             v-if="getPage.attributes.Publications"
             @click="showPub = !showPub"
-            >PUBLIKATIONEN ></a
+            >{{$t('publikationen')}}  ></a
           >
         </div>
       </Transition>

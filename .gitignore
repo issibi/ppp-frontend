@@ -70,6 +70,7 @@ typings/
 
 # dist generated folder
 .dist
+dist
 
 # Nuxt generate
 

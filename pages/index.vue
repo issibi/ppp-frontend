@@ -8,14 +8,14 @@
       :to="localePath({ name: 'kanzlei', params: { slug: kanzlei } })"
       class="kanzlei"
     >
-      <h2>KANZLEI</h2>
+      <h2>{{$t('the_firm')}}</h2>
       <p v-html="$t('kanzlei')"></p>
     </NuxtLink>
     <NuxtLink
       :to="localePath({ name: 'team', params: { slug: team } })"
       class="team"
     >
-      <h2>TEAM</h2>
+      <h2>{{$t('the_team')}}</h2>
       <p v-html="$t('team')"></p>
     </NuxtLink>
 
@@ -25,7 +25,7 @@
       "
       class="rechtsgebiete"
     >
-      <h2>RECHTSGEBIETE</h2>
+      <h2 v-html="$t('the_areas')"></h2>
       <p v-html="$t('rechtsgebiete')"></p>
     </NuxtLink>
     <!-- <NuxtLink to="/karriere/haltung" class="karriere"> -->
@@ -33,12 +33,12 @@
       :to="localePath({ name: 'karriere', params: { slug: karriere } })"
       class="karriere"
     >
-      <h2>KARRIERE</h2>
+      <h2>{{$t('the_career')}}</h2>
       <p v-html="$t('karriere')"></p>
     </NuxtLink>
     <!-- <NuxtLink to="/news/" class="news"> -->
     <NuxtLink :to="localePath({ name: 'news' })" class="news">
-      <h2>NEWS</h2>
+      <h2>{{$t('the_news')}}</h2>
       <p>
         <span
           class="news-item"

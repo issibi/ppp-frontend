@@ -49,11 +49,11 @@
                           '/' +
                             category.attributes.Slug +
                             '/' +
-                            profiles.attributes.Slug
+                            profiles.Slug
                         )
                       "
                     >
-                      {{ profiles.attributes.Profile_title }}
+                      {{ profiles.Profile_title }}
                     </NuxtLink>
                   </li>
                 </ul>
@@ -67,6 +67,7 @@
       </li>
     </ul>
   </nav>
+
 </template>
 <script>
 import axios from "axios";
@@ -114,19 +115,43 @@ export default {
           return false;
         }
       });
+ 
     },
     subs(id) {
       let filtered_subs = this.data.subs;
       return filtered_subs.filter((e) => {
+        if (e.attributes.main_category.data !== null) {
         return e.attributes.main_category.data.id === id;
+      } else {
+          return false;
+        }
       });
     },
     profiles(id) {
       let filtered_profiles = this.data.profiles;
-      return filtered_profiles.filter((e) => {
+      // filter items
+      let temp= filtered_profiles.filter((e) => {
+        if (e.attributes.sub_category.data !== null) {
         return e.attributes.sub_category.data.id === id;
-      });
+        }
+      })
+      // map and sort by ordernumber
+      return  temp.map(item => {
+        const container = {};
+        container.Slug = item.attributes.Slug;
+        container.Profile_title = item.attributes.Profile_title;
+        container.order = item.attributes.order;
+        return container;
+      }).sort((a,b) => (a.order > b.order))
     },
+    // profiles(id) {
+    //   let filtered_profiles = this.data.profiles;
+    //   return filtered_profiles.filter((e) => {
+    //     if (e.attributes.sub_category.data !== null) {
+    //     return e.attributes.sub_category.data.id === id;
+    //     }
+    //   });
+    // },
     currentRouteName(slug) {
       //console.log(this.$route.fullPath.split("/").at(-2));
       return this.$route.fullPath.split("/").at(-2) == slug ? "active" : "";
