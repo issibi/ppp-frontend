@@ -22,12 +22,6 @@ import axios from "axios";
 export default {
   name: "news",
   layout: "news",
-  // nuxtI18n: {
-  //   paths: {
-  //     de: "/news/:news",
-  //     en: "/news/:news",
-  //   },
-  // },
   data() {
     return {
       title: "",

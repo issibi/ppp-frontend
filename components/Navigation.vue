@@ -11,7 +11,9 @@
                 '/' +
                 (category.attributes.page.data !== null
                   ? category.attributes.page.data.attributes.Slug
-                  : category.attributes.profile.data.attributes.Slug)
+                  : windowWidth > 768
+                  ? category.attributes.profile.data.attributes.Slug
+                  : '')
             )
           "
         >
@@ -46,10 +48,7 @@
                     <NuxtLink
                       :to="
                         localePath(
-                          '/' +
-                            category.attributes.Slug +
-                            '/' +
-                            profiles.Slug
+                          '/' + category.attributes.Slug + '/' + profiles.Slug
                         )
                       "
                     >
@@ -67,7 +66,6 @@
       </li>
     </ul>
   </nav>
-
 </template>
 <script>
 import axios from "axios";
@@ -75,6 +73,7 @@ export default {
   name: "Navigation",
   data() {
     return {
+      windowWidth: window.innerWidth,
       data: {
         mains: [],
         subs: [],
@@ -85,6 +84,9 @@ export default {
   },
 
   methods: {
+    onResize() {
+      this.windowWidth = window.innerWidth;
+    },
     async fetchContents() {
       const getMains = await axios.get(
         "https://api.ppp.co.at//api/mains?populate=*&locale=" +
@@ -115,14 +117,13 @@ export default {
           return false;
         }
       });
- 
     },
     subs(id) {
       let filtered_subs = this.data.subs;
       return filtered_subs.filter((e) => {
         if (e.attributes.main_category.data !== null) {
-        return e.attributes.main_category.data.id === id;
-      } else {
+          return e.attributes.main_category.data.id === id;
+        } else {
           return false;
         }
       });
@@ -130,19 +131,21 @@ export default {
     profiles(id) {
       let filtered_profiles = this.data.profiles;
       // filter items
-      let temp= filtered_profiles.filter((e) => {
+      let temp = filtered_profiles.filter((e) => {
         if (e.attributes.sub_category.data !== null) {
-        return e.attributes.sub_category.data.id === id;
+          return e.attributes.sub_category.data.id === id;
         }
-      })
+      });
       // map and sort by ordernumber
-      return  temp.map(item => {
-        const container = {};
-        container.Slug = item.attributes.Slug;
-        container.Profile_title = item.attributes.Profile_title;
-        container.order = item.attributes.order;
-        return container;
-      }).sort((a,b) => (a.order > b.order))
+      return temp
+        .map((item) => {
+          const container = {};
+          container.Slug = item.attributes.Slug;
+          container.Profile_title = item.attributes.Profile_title;
+          container.order = item.attributes.order;
+          return container;
+        })
+        .sort((a, b) => a.order > b.order);
     },
     // profiles(id) {
     //   let filtered_profiles = this.data.profiles;
@@ -168,6 +171,9 @@ export default {
   async mounted() {
     await this.fetchContents();
     this.lang = this.$i18n.locale;
+    window.addEventListener("resize", () => {
+      this.windowWidth = window.innerWidth;
+    });
   },
 };
 </script>
