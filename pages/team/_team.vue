@@ -11,11 +11,7 @@
         <ul>
           <li v-for="(profiles, index) in profilesFilter(sub.id)" :key="index">
             <NuxtLink
-              :to="
-                localePath(
-                  (lang == 'en' ? '/en/team-en/' : 'team/') + profiles.Slug
-                )
-              "
+              :to="(lang == 'en' ? '/en/team-en/' : 'team/') + profiles.Slug"
             >
               {{ profiles.Profile_title }}
             </NuxtLink>
