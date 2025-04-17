@@ -61,7 +61,6 @@ main {
   padding: 10px 20px 0;
   border: 1px solid #cbcbcb;
   width: 100%;
-  transform-origin: left top;
 }
 .logo {
   width: 122px;
@@ -72,10 +71,16 @@ main {
   background-size: cover;
 }
 h1,
-h2 {
+h2,
+h3 {
   font-size: 21.3px;
   line-height: 1.25em;
   font-weight: 400;
+}
+h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
 }
 h1 + div,
 h1 + ul {
@@ -283,14 +288,25 @@ main a {
     padding-right: 28px;
     border-right: 1px solid #b1aa8d;
   }
-  .page-team .profile {
+  /* .page-team .profile {
     position: absolute;
     top: 234px;
     right: 72px;
     width: 276px;
     height: 351px;
     object-fit: cover;
+  } */
+
+  .page-team .profile {
+    position: absolute;
+    top: 260px;
+    right: 79px;
+    width: 306px;
+    height: 390px;
+    object-fit: cover;
   }
+
+
   .page-team aside {
     width: 290px;
     right: 64px;
@@ -343,7 +359,121 @@ main a {
   margin-bottom: 10px;
   color: #b1aa8d;
 }
-@media (max-width: 575.89px) {
+
+/* Styles for the Ranking and Logos Container */
+.ranking-logos-container {
+  border: 2;
+  border-color: #FF0000;
+  display: flex;
+  grid-template-columns: auto 1fr;
+  gap: 0px;
+  align-items: center;
+  
+  padding: 0 45px 0px 0;
+
+}
+
+.ranking-text {
+  width: 220px;
+  text-transform: uppercase;
+  font-size: 21.3px;
+  margin-bottom: auto;
+  color: #b1aa8d;
+  margin: 0px 0px 0px 0px;
+  padding: 15px 15px 10px 30px;
+  background-color: #453f3d;
+
+}
+
+.ranking-text-mobile {
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: auto;
+  color: #b1aa8d;
+  margin: 0px 0px 0px 0px;
+  padding: 5px 5px 5px 5px;
+  background-color: #453f3d;
+  display: block;
+  text-align: center;
+
+}
+
+/* Logos Container */
+/* .logos {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 0 45px 0px 0;
+  background-color: #b0a88e;
+} */
+
+.logos {
+  display: flex;
+  gap: 10px;
+  padding: 0 45px 0px 0;
+  background-color: #b0a88e;
+}
+
+.logos img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-direction: row;
+}
+
+@media (min-width: 768px) {
+  .logos {
+      grid-template-columns: repeat(7, 1fr);
+  }
+
+  .ranking-text-mobile {
+    display: none;
+  
+  }
+
+}
+
+@media (max-width: 768px) {
+
+
+  .ranking-logos-container {
+    padding: 0;
+  }
+
+
+  .logos {
+     display:grid;
+     width: 100%;
+     grid-template-columns: auto auto auto;
+     padding: 0 0px 0px 0;
+     justify-content: center;
+
+  }
+
+  .logos  span:first-child {
+    border: 2px solid orange;
+    display: none;
+  }
+
+
+
+  /* .logos img {
+    width: 100px;
+  
+  } */
+  
+
+
+}
+
+/* Remove margin from the last logo */
+/* .ranking-logos-container span:first-child {
+  margin-right: 10;
+
+} */
+
+@media (max-width: 767.89px) {
   .grid > *:first-child {
     padding-left: 10px;
     flex-direction: row;
@@ -375,7 +505,7 @@ main a {
 .news {
   background-image: url(../img/Home-News_mobile.jpg);
 }
-@media (min-width: 576px) {
+@media (min-width: 768px) {
   .grid {
     font-size: 17px;
   }
@@ -448,7 +578,14 @@ time {
   display: block;
 }
 
-@media (min-width: 576px) {
+.page-team-list main ul {
+  list-style: none;
+}
+.page-team-list main ul li {
+  margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
@@ -479,7 +616,7 @@ time {
     margin: 37px auto 0;
   }
   .grid {
-    padding: 0 45px 45px 0;
+    padding: 0 45px 0px 0;
     margin-left: 8px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -501,9 +638,9 @@ time {
   .page {
     position: relative;
     width: 1436px;
-    height: 907px;
+    height: 1007px;
     margin-top: 0;
-    margin-left: 0;
+    margin-left: calc((100vw - 1436px * clamp(0.5, var(--zoom), 2)) / 2);
     border: 1px solid #cbcbcb;
     padding: 45px 0 0 53px;
     transform: scale(clamp(0.5, var(--zoom), 2));
@@ -701,7 +838,7 @@ time {
   .menu {
     /* font-size: 16px;
     margin-top: 20px; */
-    line-height: 30px; 
+    line-height: 30px;
     position: relative;
     /* bottom: 50px; */
   }
@@ -754,5 +891,12 @@ time {
   }
   .profile {
     order: 0;
+  }
+  main div:not([class]) br {
+    display: none;
+  }
+  .page-rechtsgebiete main div:not([class]) p:last-child br,
+  .page-team main div:not([class]) p:last-child br {
+    display: unset;
   }
 }

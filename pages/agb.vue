@@ -1,6 +1,6 @@
 <template>
   <article :class="'show-' + show">
-    <main v-if="show">
+    <main v-if="show && page">
       <h1 v-html="formatTitle(page.attributes.Title)"></h1>
       <div v-html="page.attributes.Content"></div>
     </main>
@@ -13,8 +13,9 @@ import axios from "axios";
 export default {
   computed: {
     slug() {
-      return this.$route.fullPath.split("/").at(-1);
-    },
+    const parts = this.$route.fullPath.split("/").filter(part => part !== "");
+    return parts.at(-1) || "agb"; // Default to "agb" if empty
+  },
   },
 
   data() {
@@ -22,19 +23,28 @@ export default {
       title: "PPP ",
       show: false,
       restData: null,
+      page: null, // Initialize page as null
     };
   },
 
   methods: {
     async fetchContents() {
-      const getContact = await axios.get(
-        "https://api.ppp.co.at/api/pages?filters[Slug][$eq]=" +
-          this.slug +
-          "&locale=" +
-          this.$i18n.locale
-      );
-      this.page = getContact.data.data[0];
-      this.title = "PPP - " + this.page.attributes.Title.replace(/\/n/g, "");
+      try {
+        const getContact = await axios.get(
+          "https://api.ppp.co.at/api/pages?filters[Slug][$eq]=" +
+            this.slug +
+            "&locale=" +
+            this.$i18n.locale
+        );
+        if (getContact.data.data && getContact.data.data.length > 0) {
+          this.page = getContact.data.data[0];
+          this.title = "PPP - " + (this.page.attributes.Title ? this.page.attributes.Title.replace(/\/n/g, "") : "");
+        } else {
+          console.error("No data found for this slug");
+        }
+      } catch (error) {
+        console.error("Error fetching page data:", error);
+      }
     },
 
     formatTitle(str) {
@@ -53,13 +63,14 @@ export default {
   },
 
   head() {
+    // Only return dynamic meta if page data is loaded
     return {
-      title: this.title,
+      title: this.page ? "PPP - " + (this.page.attributes.Title ? this.page.attributes.Title.replace(/\/n/g, "") : "") : "PPP",
       meta: [
         {
           hid: "description",
           name: "description",
-          content: this.title,
+          content: this.page ? this.page.attributes.Title || "PPP" : "PPP",
         },
       ],
     };
